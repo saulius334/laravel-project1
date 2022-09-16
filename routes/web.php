@@ -27,6 +27,18 @@ Route::get('/listings/create',
 Route::post('/listings',
 [ListingController::class, 'store'])
 ->name('store');
+// show edit form
+Route::get('/listings/{listing}/edit',
+[ListingController::class, 'edit'])
+->name('edit');
+// update listing
+Route::put('/listings/{listing}', 
+[ListingController::class, 'update'])
+->name('update');
+// delete listing
+Route::delete('/listings/{listing}',
+[ListingController::class, 'destroy'])
+->name('delete');
 // Single listing
 Route::get('/listings/{listing}',
 [ListingController::class, 'show'])
