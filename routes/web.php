@@ -15,11 +15,15 @@ use App\Models\Listing;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+// All listings
 Route::get('/',
 [ListingController::class, 'index'])
 ->name('home');
-
+//show create form
+Route::get('/listings/create',
+[ListingController::class, 'create'])
+->name('create');
+// Single listing
 Route::get('/listings/{listing}',
 [ListingController::class, 'show'])
 ->name('listing');
