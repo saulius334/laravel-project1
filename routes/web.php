@@ -39,8 +39,10 @@ Route::prefix('listings')->name('l_')->group(function () {
     Route::get('/{listing}',[ListingController::class, 'show'])
     ->name('listing');
 });
-
+Route::prefix('user')->name('u_')->group(function () {
     //show register/create form
-    Route::get('/register',
-    [UserController::class, 'create']);
+    Route::get('/register',[UserController::class, 'create'])
+    ->name('create');
+
+});
     
