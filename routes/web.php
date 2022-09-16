@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\ListingController;
+use App\Models\Listing;
 use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Facades\Route;
-use App\Models\Listing;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\ListingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,31 +16,31 @@ use App\Models\Listing;
 | contains the "web" middleware group. Now create something great!
 |
 */
-// All listings
-Route::get('/',
-[ListingController::class, 'index'])
-->name('home');
-//show create form
-Route::get('/listings/create',
-[ListingController::class, 'create'])
-->name('create');
-// store listing data
-Route::post('/listings',
-[ListingController::class, 'store'])
-->name('store');
-// show edit form
-Route::get('/listings/{listing}/edit',
-[ListingController::class, 'edit'])
-->name('edit');
-// update listing
-Route::put('/listings/{listing}', 
-[ListingController::class, 'update'])
-->name('update');
-// delete listing
-Route::delete('/listings/{listing}',
-[ListingController::class, 'destroy'])
-->name('delete');
-// Single listing
-Route::get('/listings/{listing}',
-[ListingController::class, 'show'])
-->name('listing');
+Route::prefix('listings')->name('l_')->group(function () {
+    // All listings
+    Route::get('/',[ListingController::class, 'index'])
+    ->name('home');
+    //show create form
+    Route::get('/create',[ListingController::class, 'create'])
+    ->name('create');
+    // store listing data
+    Route::post('/create',[ListingController::class, 'store'])
+    ->name('store');
+    // show edit form
+    Route::get('/{listing}/edit',[ListingController::class, 'edit'])
+    ->name('edit');
+    // update listing
+    Route::put('/{listing}', [ListingController::class, 'update'])
+    ->name('update');
+    // delete listing
+    Route::delete('/{listing}',[ListingController::class, 'destroy'])
+    ->name('delete');
+    // Single listing
+    Route::get('/{listing}',[ListingController::class, 'show'])
+    ->name('listing');
+});
+
+    //show register/create form
+    Route::get('/register',
+    [UserController::class, 'create']);
+    

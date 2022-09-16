@@ -10,7 +10,7 @@
         />
     <div>
     <h3 class="text-2xl">
-        <a href="{{route('listing', $listing->id)}}">{{$listing->title}}</a>
+        <a href="{{route('l_listing', $listing->id)}}">{{$listing->title}}</a>
     </h3>
     <div class="text-xl font-cold mb-4">{{$listing->company}}</div>
     <x-listing_tags :tagsCsv="$listing->tags" />

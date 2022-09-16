@@ -1,6 +1,6 @@
 <x-layout>
 
-<a href="{{route('home')}}" class="inline-block text-black ml-4 mb-4"><i class="fa-solid fa-arrow-left"></i> Back</a>
+<a href="{{route('l_home')}}" class="inline-block text-black ml-4 mb-4"><i class="fa-solid fa-arrow-left"></i> Back</a>
 <div class="mx-4">
     <x-card class="p-10">
         <div class="flex flex-col items-center justify-center text-center">
@@ -38,8 +38,8 @@
         </div>
     </x-card>
     <x-card class="mt-4 p-2 flex space-x-6">
-        <a href="{{route('edit', $listing->id)}}"><i class="fa-solid fa-pencil"></i>Edit</a>
-        <form action="{{route('delete', $listing->id)}}" method="POST">
+        <a href="{{route('l_edit', $listing->id)}}"><i class="fa-solid fa-pencil"></i>Edit</a>
+        <form action="{{route('l_delete', $listing->id)}}" method="POST">
         @csrf
         @method('DELETE')
         <button class="text-red-500">

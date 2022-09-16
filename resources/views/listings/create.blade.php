@@ -5,7 +5,7 @@
         <p class="mb-4">Post a job to find a developer</p>
       </header>
   
-      <form action="{{route('store')}}" enctype="multipart/form-data" method="POST">
+      <form action="{{route('l_store')}}" enctype="multipart/form-data" method="POST">
         @csrf
         <div class="mb-6">
           <label for="company" class="inline-block text-lg mb-2">Company Name</label>

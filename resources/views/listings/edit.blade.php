@@ -5,7 +5,7 @@
         <p class="mb-4">Edit: {{$listing->title}}</p>
       </header>
   
-      <form action="{{route('update', $listing->id)}}" 
+      <form action="{{route('l_update', $listing->id)}}" 
       enctype="multipart/form-data" method="POST">
         @csrf
         @method('PUT')
