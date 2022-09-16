@@ -14,7 +14,7 @@
         @else
         <a href="/register"
           class="inline-block border-2 border-white text-white py-2 px-4 rounded-xl uppercase mt-2 hover:text-black hover:border-black">Sign
-          Up to List a Gig</a>
+          Up to List a Job</a>
         @endauth
       </div>
     </div>
