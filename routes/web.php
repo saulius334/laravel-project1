@@ -10,6 +10,7 @@ use App\Http\Controllers\ListingController;
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
+
 |
 | Here is where you can register web routes for your application. These
 | routes are loaded by the RouteServiceProvider within a group which
@@ -18,6 +19,8 @@ use App\Http\Controllers\ListingController;
 */
 Route::get('/login', [UserController::class, 'login']) //middleware auth route
 ->name('login'); 
+
+
 Route::prefix('listings')->name('l_')->group(function () {
     // All listings
     Route::get('/',[ListingController::class, 'index'])
@@ -42,12 +45,13 @@ Route::prefix('listings')->name('l_')->group(function () {
     Route::delete('/{listing}',[ListingController::class, 'destroy'])
     ->name('delete')
     ->middleware('auth');
+    // Manage Listings
+    Route::get('/manage', [ListingController::class, 'manage'])
+    ->name('manage')
+    ->middleware('auth');
     // Single listing
     Route::get('/{listing}',[ListingController::class, 'show'])
     ->name('listing');
-    // Manage Listings
-    Route::get('/manage', [ListingController::class, 'manage'])
-    ->name('manage');
 });
 Route::prefix('user')->name('u_')->group(function () {
     //show register/create form

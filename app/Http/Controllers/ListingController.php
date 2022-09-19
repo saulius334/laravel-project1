@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers;
 
+// use App\Models\User;
 use App\Models\Listing;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
-use App\Models\User;
+// use App\Models\User;
+
 
 class ListingController extends Controller
 {
+    
     public function index() { //show all listing
         return view('listings.index', [
             'listings' => Listing::latest()
@@ -80,6 +83,8 @@ class ListingController extends Controller
         ->with('message', 'Listing deleted successfully');
     }
     public function manage() {
-        return view('listings.manage');
+        return view('listings.manage', [
+            'listings' => auth()->user()->listings()->get()
+        ]);
     }
 }
