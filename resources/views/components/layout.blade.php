@@ -36,7 +36,7 @@
         </span>
       </li>
       <li>
-        {{-- <a href="{{route('l_manage')}}" class="hover:text-laravel"><i class="fa-solid fa-gear"></i> Manage Listings</a> --}}
+        <a href="{{route('l_manage')}}" class="hover:text-laravel"><i class="fa-solid fa-gear"></i> Manage Listings</a>
       </li>
       <li>
         <form class="inline" method="POST" action="{{route('u_logout')}}">

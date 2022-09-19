@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Listing;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class ListingController extends Controller
 {
@@ -48,6 +49,10 @@ class ListingController extends Controller
         return view('listings.edit', ['listing' => $listing]);
     }
     public function update(Request $request, Listing $listing) { // update listing data
+        if ($listing->user_id != auth()->id()) {
+            abort(403, 'Unauthorized action');
+        }
+
         $forms = $request->validate([
             'title' => 'required',
             'company' => ['required'],
@@ -67,8 +72,14 @@ class ListingController extends Controller
         ->with('message', 'Listing updated successfully!');
     }
     public function destroy(Listing $listing) {
+        if ($listing->user_id != auth()->id()) {
+            abort(403, 'Unauthorized action');
+        }
         $listing->delete();
         return redirect()->route('l_home')
         ->with('message', 'Listing deleted successfully');
+    }
+    public function manage() {
+        return view('listings.manage');
     }
 }
