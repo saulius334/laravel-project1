@@ -43,6 +43,12 @@ Route::prefix('user')->name('u_')->group(function () {
     //show register/create form
     Route::get('/register',[UserController::class, 'create'])
     ->name('create');
+    //create new user
+    Route::post('/', [UserController::class, 'store'])
+    ->name('store');
+    //show login screen
+    Route::get('/login',[UserController::class, 'login'])
+    ->name('login');
 
 });
     

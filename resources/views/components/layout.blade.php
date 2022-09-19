@@ -31,15 +31,15 @@
     <ul class="flex space-x-6 mr-6 text-lg">
       @auth
       <li>
-        <span class="font-bold uppercase">
+        <span class="font-bold capitalized">
           Welcome {{auth()->user()->name}}
         </span>
       </li>
       <li>
-        <a href="/listings/manage" class="hover:text-laravel"><i class="fa-solid fa-gear"></i> Manage Listings</a>
+        <a href="{{route('l_manage')}}" class="hover:text-laravel"><i class="fa-solid fa-gear"></i> Manage Listings</a>
       </li>
       <li>
-        <form class="inline" method="POST" action="/logout">
+        <form class="inline" method="POST" action="{{route('u_logout')}}">
           @csrf
           <button type="submit">
             <i class="fa-solid fa-door-closed"></i> Logout
@@ -51,7 +51,7 @@
         <a href="{{route('u_create')}}" class="hover:text-laravel"><i class="fa-solid fa-user-plus"></i> Register</a>
       </li>
       <li>
-        <a href="/login" class="hover:text-laravel"><i class="fa-solid fa-arrow-right-to-bracket"></i> Login</a>
+        <a href="{{route('u_login')}}" class="hover:text-laravel"><i class="fa-solid fa-arrow-right-to-bracket"></i> Login</a>
       </li>
       @endauth
     </ul>
