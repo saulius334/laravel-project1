@@ -26,6 +26,26 @@ class UserController extends Controller
         ->with('message', 'User created! Welcome!');
     }
     public function login() { //show register create form
-        return view('users.register');
+        return view('users.login');
+    }
+    public function authenticate(Request $request) {
+        $forms = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => 'required'
+        ]);
+        if (auth()->attempt($forms)) {
+            $request->session()->regenerate();
+            return redirect()->route('l_home')
+            ->with('message', 'You are now logged in!');
+        }
+        return back()->withErrors(['email' => 'Invalid email or password'])
+        ->onlyInput('email');
+    }
+    public function logout(Request $request) {
+        auth()->logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect()->route('l_home')
+        ->with('message', 'You have logged out!');
     }
 }

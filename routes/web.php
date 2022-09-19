@@ -16,25 +16,32 @@ use App\Http\Controllers\ListingController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/login', [UserController::class, 'login']) //middleware auth route
+->name('login'); 
 Route::prefix('listings')->name('l_')->group(function () {
     // All listings
     Route::get('/',[ListingController::class, 'index'])
     ->name('home');
     //show create form
     Route::get('/create',[ListingController::class, 'create'])
-    ->name('create');
+    ->name('create')
+    ->middleware('auth');
     // store listing data
     Route::post('/create',[ListingController::class, 'store'])
-    ->name('store');
+    ->name('store')
+    ->middleware('auth');
     // show edit form
     Route::get('/{listing}/edit',[ListingController::class, 'edit'])
-    ->name('edit');
+    ->name('edit')
+    ->middleware('auth');
     // update listing
     Route::put('/{listing}', [ListingController::class, 'update'])
-    ->name('update');
+    ->name('update')
+    ->middleware('auth');
     // delete listing
     Route::delete('/{listing}',[ListingController::class, 'destroy'])
-    ->name('delete');
+    ->name('delete')
+    ->middleware('auth');
     // Single listing
     Route::get('/{listing}',[ListingController::class, 'show'])
     ->name('listing');
@@ -42,13 +49,22 @@ Route::prefix('listings')->name('l_')->group(function () {
 Route::prefix('user')->name('u_')->group(function () {
     //show register/create form
     Route::get('/register',[UserController::class, 'create'])
-    ->name('create');
+    ->name('create')
+    ->middleware('guest');
     //create new user
     Route::post('/', [UserController::class, 'store'])
     ->name('store');
     //show login screen
     Route::get('/login',[UserController::class, 'login'])
-    ->name('login');
+    ->name('login')
+    ->middleware('guest');
+    //log in
+    Route::post('/authenticate',[UserController::class, 'authenticate'])
+    ->name('authenticate');
+    //logout
+    Route::post('/logout', [UserController::class, 'logout'])
+    ->name('logout')
+    ->middleware('auth');
 
 });
     
