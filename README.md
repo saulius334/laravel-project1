@@ -32,7 +32,8 @@ Set the database connection in .env before migrating
 Start the local development server  
   
 ```php artisan serve```  
-
+  
+You can now access the server at http://localhost:8000/listings
 
 
 
