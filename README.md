@@ -40,7 +40,7 @@ You can now access the server at http://localhost:8000/listings
 
 
 ## Database seeding    
-Open the DummyDataSeeder and set the property values as per your requirement  
+Open the DatabaseSeeder and set the property values as per your requirement  
   
 ```database/seeders/DatabaseSeeder.php```  
   
