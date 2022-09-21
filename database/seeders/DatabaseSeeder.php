@@ -20,9 +20,9 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
         $user = User::factory()->create([
             'name' => "Saulius",
-            'email' => 'saulius@gmail.com'
+            'email' => 'saulius@gmail.com',
         ]);
-        Listing::factory(6)->create([
+        Listing::factory(18)->create([
             'user_id' => $user->id
         ]);
 

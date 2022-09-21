@@ -13,6 +13,10 @@
             <div class="text-xl font-bold mb-4">
                 {{$listing->company}}
             </div>
+            <div class="text-xl font-bold mb-4">
+                <span>Posted on</span>
+            {{substr($listing->date, 0, 10)}}
+            </div>
 
             <x-listing_tags :tagsCsv="$listing->tags" />
                 

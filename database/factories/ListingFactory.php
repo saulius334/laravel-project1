@@ -21,6 +21,7 @@ class ListingFactory extends Factory
         $tags = implode(",", $tags);
         return [
             'title' => $this->faker->sentence(),
+            'date' => $this->faker->dateTimeThisMonth(),
             'tags' => $tags,
             'company' => $this->faker->company(),
             'email' => $this->faker->companyEmail(),
