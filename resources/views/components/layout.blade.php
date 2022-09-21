@@ -27,7 +27,7 @@
 
 <body class="mb-48">
   <nav class="flex justify-between items-center mb-4">
-    <a href="{{route('l_home')}}"><img class="w-24" src="{{asset('images/logo.svg')}}" alt="logo" class="logo" /></a>
+    <a href="{{route('l_home')}}" class="m-2"><img class="w-24" src="{{asset('images/logo.svg')}}" alt="logo" class="logo" /></a>
     <ul class="flex space-x-6 mr-6 text-lg">
       @auth
       <li>

@@ -16,9 +16,12 @@ class ListingFactory extends Factory
      */
     public function definition()
     {
+        $tags = ['Laravel', 'API', 'PHP', 'JavaScript'];
+        $tags = array_rand(array_flip($tags), 2);
+        $tags = implode(",", $tags);
         return [
             'title' => $this->faker->sentence(),
-            'tags' => 'laravel, api, PHP, javascript',
+            'tags' => $tags,
             'company' => $this->faker->company(),
             'email' => $this->faker->companyEmail(),
             'website' => $this->faker->url(),
