@@ -12,11 +12,21 @@ use Illuminate\Http\Request;
 class ListingController extends Controller
 {
     
-    public function index() { //show all listing
+    public function index(Request $request) { //show all listing
+        $listings = match ($request->sort) {
+            'date_asc' => Listing::orderBy('date', 'asc')->get(),
+            'date_desc' => Listing::orderBy('date', 'desc')->get(),
+            'name_asc' => Listing::orderBy('name', 'asc')->get(),
+            'name_desc' => Listing::orderBy('name', 'desc')->get(),
+            default => Listing::all()
+        };
+
+
         return view('listings.index', [
             'listings' => Listing::latest()
             ->filter(request(['tag', 'search']))
-            ->paginate(6)
+            ->paginate(6),
+            'sortSelect' => $request->sort
         ]);
     }
 
