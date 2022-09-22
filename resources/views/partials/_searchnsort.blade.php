@@ -1,4 +1,4 @@
-<div class="w-full flex m-4 ml-20 space-x-20">
+<div class="w-full flex m-4 ml-20 space-x-20 --content">
   <div class="relative border-2 border-gray-100 rounded-lg w-4/6">
     <form action="{{route('l_home')}}" method="get">
       <div class="absolute top-4 left-3">
@@ -13,14 +13,14 @@
       </div>
     </form>
     </div>
-    <form action="{{route('l_home')}}" method="GET">
-  <div class="border-2 border-gray-100 rounded-lg w-1/6 flex justify-center gap-10 focus:shadow focus:outline-none --content">
-      <select name="sort" class="w-full">
+    <div class="border-2 border-gray-100 rounded-lg w-1/6 flex justify-center gap-10 focus:shadow focus:outline-none">
+    <form action="{{route('l_home')}}" method="GET" class="w-full h-full">
+      <select name="sort" class="w-full h-full">
         <option value="date_asc" @if ('date_asc' == $sortSelect) selected @endif>New</option>
         <option value="date_desc" @if ('date_desc' == $sortSelect) selected @endif>Old</option>
         <option value="name_asc" @if ('name_asc' == $sortSelect) selected @endif>Name a-z</option>
         <option value="name_desc" @if ('name_desc' == $sortSelect) selected @endif>Name z-a</option>
       </select>
+    </form>
     </div>
-  </form>
-</div>
+  </div>
