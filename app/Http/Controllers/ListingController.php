@@ -13,22 +13,32 @@ class ListingController extends Controller
 {
 
     public function index(Request $request) { //show all listing
-
-        $listingsort = match ($request->sort) {
-            'date_asc' => Listing::orderBy('date', 'asc')->paginate(6)->withQueryString(),
-            'date_desc' => Listing::orderBy('date', 'desc')->paginate(6)->withQueryString(),
-            'name_asc' => Listing::orderBy('name', 'asc')->paginate(6)->withQueryString(),
-            'name_desc' => Listing::orderBy('name', 'desc')->paginate(6)->withQueryString(),
-            default => Listing::paginate(6)->withQueryString()
-        };
+        if ($request->sort) {
+            if ($request->search) {
+                $listings = Listing::where(function($query) use ($request) {
+                    $query->where('title', 'like', '%' . $request->search . '%')
+                    ->orWhere('description', 'like', '%' . $request->search . '%')
+                    ->orWhere('tags', 'like', '%' . $request->search . '%');
+                })->paginate(6)->withQueryString();
+            } else {
+                $listings = Listing::paginate(6)->withQueryString();
+            }
+        } else {
+            if ($request->search) {
+                $listings = Listing::where('title', 'like', '%' . $request->search . '%')
+                ->orWhere('description', 'like', '%' . $request->search . '%')
+                ->orWhere('tags', 'like', '%' . $request->search . '%')
+                ->paginate(6)->withQueryString();
+            } else {
+                $listings = Listing::paginate(6)->withQueryString();
+            }
+        }
 
 
         return view('listings.index', [
-            'listingsort' => $listingsort, // STRIGAU
-            'sortSelect' => $request->sort,
-            'listings' => Listing::latest()
-                ->filter(request(['tag', 'search']))
-                ->paginate(6),
+            'listings' => $listings,
+
+            'search' => $request->search ?? ''
         ]);
     }
 
