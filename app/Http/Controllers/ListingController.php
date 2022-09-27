@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-// use App\Models\User;
 use App\Models\Listing;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
-// use App\Models\User;
+
 
 
 class ListingController extends Controller
@@ -14,14 +13,18 @@ class ListingController extends Controller
 
     public function index(Request $request) { //show all listing
         if ($request->sort) {
+            $sortID = $request->sort;
+            $orderByParams = explode("_", $request->sort);
             if ($request->search) {
-                $listings = Listing::where(function($query) use ($request) {
+                $listings= Listing::orderBy($orderByParams[0], $orderByParams[1])
+                ->where(function($query) use ($request) {
                     $query->where('title', 'like', '%' . $request->search . '%')
                     ->orWhere('description', 'like', '%' . $request->search . '%')
                     ->orWhere('tags', 'like', '%' . $request->search . '%');
                 })->paginate(6)->withQueryString();
             } else {
-                $listings = Listing::paginate(6)->withQueryString();
+                $listings = Listing::orderBy($orderByParams[0], $orderByParams[1])
+                ->paginate(6)->withQueryString();
             }
         } else {
             if ($request->search) {
@@ -34,11 +37,10 @@ class ListingController extends Controller
             }
         }
 
-
         return view('listings.index', [
             'listings' => $listings,
-
-            'search' => $request->search ?? ''
+            'sort' => $sortID ?? 0,
+            'search' => $request->search ?? null
         ]);
     }
 
